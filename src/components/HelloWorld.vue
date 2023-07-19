@@ -1,18 +1,15 @@
+<template>
+  <button class="rounded-full h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-100 bg-black" @click="store.increment">
+    Click me
+  </button>
+</template>
+
 <script setup lang="ts">
   import {mainStore} from './../stores/main';
   const store = mainStore();
 
   defineProps<{ msg: string }>()
 </script>
-
-<template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-<button class="rounded-full" @click="store.increment">
-  Click me
-</button>
-</template>
 
 <style scoped>
 .read-the-docs {
