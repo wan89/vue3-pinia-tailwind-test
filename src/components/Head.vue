@@ -1,7 +1,7 @@
 <template>
-  <nav class="flex flex-row box-content h-8 w-100 p-4 border-b">
+  <nav class="flex flex-row box-content h-8 w-100 p-4 border-b space-x-3">
     <template v-for="(item, idx) in navList" :key="idx">
-      <div :class="'basis-1/4 box-border text-center '+((currentTarget == item.targetName)? 'bg-yellow-400' : '')">
+      <div :class="'basis-1/4 box-border text-center border border-slate-700 '+((currentTarget == item.targetName)? 'bg-yellow-400' : '')">
         <router-link :to='item.routeLink'>{{ item.name }}</router-link>
       </div>
     </template>

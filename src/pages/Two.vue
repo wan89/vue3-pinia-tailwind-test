@@ -1,49 +1,32 @@
 <template>
-  <div> hello </div>
-  {{ a }}
-  <div v-for="(data, idx) in datas" :key="idx">
-    <span style="display: block; margin-bottom: 10px;">{{ data }}</span>
+  <div class="flex flex-wrap">
+    <div v-for="(data, idx) in datas" :key="idx" class="w-20 m-5 cursor-pointer hover:bg-sky-700 hover:text-sky-200 text-center p-3">
+      <span class="space-x-3">
+        <img :src="data.icon" />
+        {{ data.categoryName }}
+      </span>
+    </div>
   </div>
-  <button @click="()=>{a++;}">aa</button>
+  <button class="rounded-md bg-red-400 p-2 w-full" @click="appendA">{{ a }}</button>
 </template>
 
-<!-- <script setup lang="ts">
-  import {mainStore} from './../stores/main';
+<script lang="ts" setup>
+  import { mainStore } from './../stores/main';
+  import { ref, watchEffect } from 'vue';
+
   const store = mainStore();
-  const data = store.fetchLists();
+  
+  let datas = ref({});
+  let a = ref(0);
 
-  console.log(data);
-
-  defineProps<{ msg: string }>()
+  const appendA = () => {
+    a.value++;
+  }
 
   watchEffect(() => {
-    store.fetchLists().then((res:any) => {
-  	  console.log(res);
+    store.fetchLists(a.value).then((res:any) => {
+      console.log("!!!",res);
+      datas.value = res.data;
     })
   });
-</script> -->
-
-<script lang="ts">
-import {mainStore} from './../stores/main';
-// const store = mainStore();
-
-  export default {
-    data(){
-      return {
-        datas : {},
-        store: mainStore(),
-        a: 0
-      }
-    },
-    mounted(){
-      this.store.fetchLists().then((res)=>{
-        this.datas = res.data;
-      })
-    },
-    watchEffect : (() => {
-      this.store.fetchLists(a).then((res:any) => {
-        console.log(res);
-      })
-    }),
-  }
 </script>
