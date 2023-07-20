@@ -1,13 +1,20 @@
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const mainStore = defineStore('mainStore', {
-  state: () => ({ count: 0, name: 'Eduardo' }),
+  state: () => ({
+    isLoading: false
+  }),
   getters: {
-    doubleCount: (state) => state.count * 2,
+    getIsLoading: (state) => state.isLoading,
   },
   actions: {
-    increment() {
-      this.count++
+    showLoading(){ this.isLoading = true; },
+    hideLoading(){ this.isLoading = false; },
+    // 
+    fetchLists(a:Number) {
+      console.log("fetchLists ~!"+a);
+      return axios.get('https://app.wedqueen.com/api/v7/main/display')
     },
   },
 })
