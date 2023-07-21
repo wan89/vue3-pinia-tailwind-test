@@ -12,21 +12,27 @@
 
 <script lang="ts" setup>
   import { mainStore } from './../stores/main';
-  import { ref, watchEffect } from 'vue';
+  import { ref, watchEffect, onUpdated, onMounted, Ref} from 'vue';
+  import {CategoryItem} from '@/types/ICategoryItem'
 
   const store = mainStore();
-  
-  let datas = ref({});
+  let datas:Ref<CategoryItem[]> = ref([]);
   let a = ref(0);
 
   const appendA = () => {
     a.value++;
   }
 
+  onUpdated(()=> {
+    console.log("!! hello !!");
+  });
+
+  onMounted(() => {});
+
   watchEffect(() => {
     store.fetchLists(a.value).then((res:any) => {
-      console.log("!!!",res);
-      datas.value = res.data;
+      console.log("!!!",res.data);
+      datas.value = res.data as Array<CategoryItem>
     })
   });
 </script>
