@@ -4,6 +4,7 @@
       <span class="space-x-3">
         <img :src="data.icon" />
         {{ data.categoryName }}
+        {{ data.count }}
       </span>
     </div>
   </div>
